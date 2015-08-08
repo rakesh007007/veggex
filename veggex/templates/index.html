@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+    {%block content%}
+    
+    <section id="form"><!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 col-sm-offset-1">
+                    <div class="login-form"><!--login form-->
+                        <h2>Login to your account</h2>
+                         <form type="post" method="post" action="logPost">
+                            {% csrf_token %}
+                            <h4>Login to continue:</h4>
+                            <br><span>Email:</span><input name="email_id" value="" type="text">
+                             <br><span>Password:</span><input name="password" value="" type="password">
+                            <br><span></span><input value = "logIn" type="submit">
+                                
+                            </form>
+                        
+                    </div><!--/login form-->
+                </div>
+                <div class="col-sm-1">
+                    <h2 class="or">OR</h2>
+                </div>
+                <div class="col-sm-4">
+                    <div class="signup-form"><!--sign up form-->
+                        <h2>New User Signup!</h2>
+                         <form type="post" method="post" action="regPost">
+                            {% csrf_token %}
+                            <h4>Basic details:</h4>
+                            <br><span>Name:</span><input name="name" value="" type="text">
+                            <br><span>Enno:</span><input name="enno" value="" type="text">
+                            <br><span>Password:</span><input name="password" value="" type="text">
+                            <br><span>Email:</span><input name="email_id" value="" type="text">
+                            <br><span>Mobile:</span><input name="mob" value="" type="text">
+                            <h4>Address</h4>
+                            <br><span>City:</span><input name="city" value="" type="text">
+                            <br><span>Town:</span><input name="town" value="" type="text">
+                            <br><span>Pincode:</span><input name="pincode" value="" type="text">
+                            <br><span>House No:</span><input name="house_no" value="" type="text">
+                            <br><span></span><input value="SignUp" type="submit">
+                                
+                            </form>
+
+                    </div><!--/sign up form-->
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endblock%}

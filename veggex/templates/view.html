@@ -1,0 +1,120 @@
+ {% extends 'base.html' %}
+    {%block content%}
+    <section>
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-sm-9 padding-right">
+                    <div class="product-details"><!--product-details-->
+                        <div class="col-sm-5">
+                            <div class="view-product">
+                                <img src="{{product.coverphoto.url}}" alt="" />
+                                <h3>{{product.conditions}}</h3>
+                            </div>
+                            <div id="similar-product" class="carousel slide" data-ride="carousel">
+                                
+                                  <!-- Wrapper for slides -->
+                                    <div class="carousel-inner">
+                                        <div class="item active">
+                                        {% for img in images%}
+                                            {% if product.item_id = img.item_id %}
+                                          <a href=""><img src="{{img.image.url}}" alt="" height="45" width="45"></a>
+                                          {%endif%}
+                                            {%endfor%}
+                                          
+                                        </div>
+                                        
+                                        
+                                    </div>
+
+                                  <!-- Controls -->
+                                  
+                            </div>
+
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="product-information"><!--/product-information-->
+                                
+                                <h2>{{product.name}}</h2>
+                                <p>seller: <a>{{product.user.name}}</a></p>
+                                <img src="https://startupveggex.herokuapp.com/media/images/product-details/rating.png" alt="" />
+                                <span>
+                                    <span>INR {{product.price}}</span>
+                                    <form method="post" action="addItemPost">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="item_id" value="{{product.item_id}}">
+                                    <button type="submit" class="btn btn-fefault cart">
+                                        <i class="fa fa-shopping-cart"></i>
+                                        Add to cart
+                                    </button>
+                                    </form>
+                                </span>
+                                <a href=""><img src="https://startupveggex.herokuapp.com/media/images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+                            </div><!--/product-information-->
+                        </div>
+                    </div><!--/product-details-->
+                    
+                    <div class="category-tab shop-details-tab"><!--category-tab-->
+                        <div class="col-sm-12">
+                            <ul class="nav nav-tabs">
+                                <li><a href="#details" data-toggle="tab">Details</a></li>
+                                <li><a href="#companyprofile" data-toggle="tab">Seller</a></li>
+                               
+                            </ul>
+                        </div>
+                        <div class="tab-content">
+                            <div class="tab-pane fade" id="details" >
+                                <p>{{product.description}}</p>
+                            </div>
+                            
+                            <div class="tab-pane fade" id="companyprofile" >
+                                <p>{{ product.user.name }}</p>
+                                <p>Mob:{{ product.user.mob }}</p>
+                                <p>email:{{ product.user.email_id }}</p>
+                                <p>city:{{ product.user.address.city }}</p>
+                                <p>town:{{ product.user.address.town }}</p>
+                                <p>pincode:{{ product.user.address.pincode }}</p>
+                            </div>
+                            
+                            
+                            
+                            <div class="tab-pane fade active in" id="reviews" >
+                                <div class="col-sm-12">
+                                    
+                                    <p>{{product.description}}</p>
+                                    
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div><!--/category-tab-->
+                    
+                    
+                                    
+                        </div>
+                    </div><!--/recommended_items-->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    <div>
+    <h1>yoooo</h1>
+    {%for comm in comments%}
+    <h1>{{comm.comment}}</h1>
+
+    {%endfor%}
+    <h1>make a comment:</h1>
+    <form method="post" action="addComment">
+    {% csrf_token %}
+    <input type="hidden" name="item_id" value="{{product.item_id}}">
+    <input name="comment" value="">
+    <button type="submit" class="btn btn-fefault cart">
+        <i class="fa fa-shopping-cart"></i>
+        Submit
+    </button>
+    </form>
+    </div>
+
+
+    {%endblock%}

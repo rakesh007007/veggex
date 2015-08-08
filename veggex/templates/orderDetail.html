@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+    {%block content%}
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="seller">Seller</td>
+                            <td class="price">Price</td>
+                            <td class="remove">Remove</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for orderitem in orderditems %}
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="{{orderitem.item.coverphoto.url}}" width="35" height="35" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">{{orderitem.item.name}}</a></h4>
+                                <div style="width:500"><p>{{orderitem.item.description}}<p></div>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{orderitem.item.user.name}}</p>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">{{orderitem.item.price}}</p>
+                            </td>
+                            <td class="cart_delete">
+                                
+                                
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                         <tr>
+                         <h1>cart totals</h1>
+                            <td class="cart_product">
+                                
+                            </td>
+                            <td class="cart_description">
+                               
+                            </td>
+                            <td class="cart_price">
+                            </td>
+                            <td class="cart_total">
+                            <p class="cart_total_price">{{total}}</p>
+                            </td>
+                            <td class="cart_delete">
+                                 
+                                
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>What would you like to do next?</h3>
+                <p>Choose if you have a discount code or reward points you want to use or would like to estimate your delivery cost.</p>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Cart Sub Total <span>{{total}}</span></li>
+                            <li>Shipping Cost <span>Free</span></li>
+                            <li>Total <span>{{total}}INR</span></li>
+                        </ul>
+                            <a class="btn btn-default check_out" href="orderStep1">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#do_action-->
+    {%endblock%}

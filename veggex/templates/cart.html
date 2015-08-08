@@ -1,0 +1,77 @@
+ {% extends 'base.html' %}
+    {%block content%}
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Item</td>
+                            <td class="description"></td>
+                            <td class="seller">Qty</td>
+                            <td class="price">Rate</td>
+                            <td class="remove">Remove</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for cartitem in cartitems %}
+                        <tr>
+                            <td class="cart_product">
+                                <a href=""><img src="{{cartitem.product.coverphoto.url}}" width="35" height="35" alt=""></a>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">{{cartitem.product.name}}</a></h4>
+                                <div style="width:500"><p>{{cartitem.product.description}}<p></div>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{cartitem.qtyInUnits}} {{cartitem.unit}}</p>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price"><b>{{cartitem.product.pricePerUnit}}</b> {{cartitem.product.unit}} </p>
+                            </td>
+                            <td class="cart_delete">
+                                <form method="post" action="removeItemPost">
+                                {% csrf_token %}
+                                <input type="hidden" name="item_id" value="{{cartitem.cartitem_id}}">
+                                <button style="background:none" class="cart_quantity_delete" type="submit" href=""><i class="fa fa-times"></i></button>
+                                </form>
+                                
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    <section id="do_action">
+        <div class="container">
+            <div class="heading">
+                <h3>What would you like to do next?Checkout</h3>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="total_area">
+                        <ul>
+                            <li>Cart Sub Total <span>{{carttotal}}</span></li>
+                            <li>Shipping Cost <span>{{shippingCost}}</span></li>
+                            <li>Total <span>{{carttotal}}</span></li>
+                        </ul>
+                            <a class="btn btn-default check_out" href="orderStep1">Check Out</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!--/#do_action-->
+    {%endblock%}

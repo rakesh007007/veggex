@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+    {%block content%}
+    
+    <section id="form"><!--form-->
+		<div class="container">
+				
+					<div class="signup-form"><!--sign up form-->
+						<h2>Add a new product</h2>
+						<form type="post" method="post" action="productPost" enctype="multipart/form-data">
+					    {% csrf_token %}
+					    <h4>Add Your product detailss:</h4>
+					    <br><span>Product Name:</span><input name="name" value="" type="text">
+					    <br><span>Product Condition:</span><input name="conditions" value="" type="text">
+					     <br><span>condition:</span><input id = "image" name="image" value="" type="file" multiple>
+					    <select name="categories">
+					        {% for categ in categories %}
+					        <option value="{{categ.name}}">{{categ.name}}</option>
+					        {% endfor %}
+
+					    </select>
+					    <br><span>add:</span><input value="add" type="submit" >
+					        
+					    </form>
+
+					</div><!--/sign up form-->
+			</div>
+		</div>
+	</section>
+    {%endblock%}

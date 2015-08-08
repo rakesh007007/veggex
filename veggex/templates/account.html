@@ -1,0 +1,23 @@
+ {% extends 'base.html' %}
+    {%block content%}
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+            <h4>You account details are:</h4>
+            <span>Name of Institution: <b>{{user.nameOfInstitution}}</b></span><br>
+            <span>profilephoto:</span><img src="{{user.profilePhoto.url}}" height="100" width="100"><br>
+            <span>Name of Owner: <b>{{user.nameOfOwner}}</b></span><br>
+            <span>Email: <b>{{user.mailId}}</b></span><br>
+            <span>Mobile: <b>{{user.mobileNo}}</b></span><br>
+                
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+    {%endblock%}

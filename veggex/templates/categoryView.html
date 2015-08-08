@@ -1,0 +1,46 @@
+
+    {% extends 'base.html' %}
+    {%block content%}
+
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                </div>
+                
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                      {% for product in products %}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="{{product.coverphoto.url}}" alt=""  width="50" height="200" />
+                                        <h2>{{product.name}}</h2>
+                                        {%if product.priceType = 'custom rates'%}
+                                        <span>Rate: </span><b>{{product.pricePerUnit}}</b><span> per <b>{{product.unit}}<b></span><br>
+                                        {%endif%}
+                                        <form type="post" method="post" action="addtocart">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="productId" value="{{product.product_id}}">
+                                        <span>Qty:</span><input value="2" type="text" name="qty"/> <span> {{product.unit}}</span>
+                                        <br><br>
+                                        <input type="submit" value="Add to cart">
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% endfor %}
+                    </div><!--features_items-->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endblock%}
+    
+   

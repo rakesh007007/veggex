@@ -1,0 +1,36 @@
+
+    {% extends 'base.html' %}
+    {%block content%}
+
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                </div>
+                
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                      {% for categ in categories %}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <a href="categoryView?categoryId={{categ.category_id}}"><img src="{{categ.coverphoto.url}}" alt=""  width="50" height="200" />
+                                        <h2>{{categ.name}}</h2></a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% endfor %}
+                    </div><!--features_items-->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endblock%}
+    
+   

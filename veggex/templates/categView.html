@@ -1,0 +1,86 @@
+
+    {% extends 'base.html' %}
+    {%block content%}
+
+    <section id="advertisement">
+        <div class="container">
+            <img src="https://startupveggex.herokuapp.com/media/images/shop/advertisement.jpg" alt="" />
+        </div>
+    </section>
+    
+    <section>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3">
+                    <div class="left-sidebar">
+                        <h2>Category</h2>
+                        <div class="panel-group category-products" id="accordian"><!--category-productsr-->
+                            {% for categ in categories %}
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h4 class="panel-title"><a href="#">{{categ.name}}</a></h4>
+                                </div>
+                            </div>
+                            {% endfor %}
+                            
+                        </div><!--/category-productsr-->
+                    
+                        <div class="brands_products"><!--brands_products-->
+                            <h2>Brands</h2>
+                            <div class="brands-name">
+                                <ul class="nav nav-pills nav-stacked">
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(50)</span>Acne</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(56)</span>Grüne Erde</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(27)</span>Albiro</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(32)</span>Ronhill</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(5)</span>Oddmolly</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(9)</span>Boudestijn</a></li>
+                                    <li><a href="https://startupveggex.herokuapp.com/media/"> <span class="pull-right">(4)</span>Rösch creative culture</a></li>
+                                </ul>
+                            </div>
+                        </div><!--/brands_products-->
+                        
+                       
+                        
+                    </div>
+                </div>
+                
+                <div class="col-sm-9 padding-right">
+                    <div class="features_items"><!--features_items-->
+                        <h2 class="title text-center">Items</h2>
+                      {% for item in items %}
+                        <div class="col-sm-4">
+                            <div class="product-image-wrapper">
+                                <div class="single-products">
+                                    <div class="productinfo text-center">
+                                        <img src="{{item.coverphoto.url}}" alt=""  width="50" height="200" />
+                                        <h2>{{item.price}} INR</h2>
+                                        <p>{{item.name}}</p>
+                                        <form method="post" action="addItemPost">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="item_id" value="{{item.item_id}}">
+                                        
+                                        <button type="submit"  class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                        </form>
+                                        <form method="post" action="productView">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="item_id" value="{{item.item_id}}">
+                                        <button type="submit" class="btn btn-default add-to-cart"><i class="fa"></i>  View  </button>
+                                        </form>
+                                        
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        
+                        {% endfor %}
+                    </div><!--features_items-->
+                    
+                </div>
+            </div>
+        </div>
+    </section>
+    {%endblock%}
+    
+   

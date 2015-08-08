@@ -1,0 +1,57 @@
+ {% extends 'base.html' %}
+    {%block content%}
+    <section id="cart_items">
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                  <li><a href="#">Home</a></li>
+                  <li class="active">Shopping Cart</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                        <tr class="cart_menu">
+                            <td class="image">Order Id</td>
+                            <td class="description">Status</td>
+                            <td class="seller">Date</td>
+                            <td class="price">Subtotal</td>
+                            <td class="remove">Details</td>
+                            <td></td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                     {% for order in orders %}
+                        <tr>
+                            <td class="cart_product">
+                                <p>{{order.order_id}}</p>
+                            </td>
+                            <td class="cart_description">
+                                <h4><a href="">{{order.status}}</a></h4>
+                            </td>
+                            <td class="cart_price">
+                                <p>{{order.last_updated}}</p>
+                            </td>
+                            <td class="cart_total">
+                                <p class="cart_total_price">{{order.subtotal}}</p>
+                            </td>
+                            <td class="cart_delete">
+                            <form method="post" action="orderDetail">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="order_id" value="{{order.order_id}}">
+                                        
+                                        <button type="submit"><b>see details>></b></button>
+                                        </form>
+                                
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section> <!--/#cart_items-->
+
+   
+    {%endblock%}
